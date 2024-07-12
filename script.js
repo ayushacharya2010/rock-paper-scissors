@@ -109,6 +109,14 @@ while (keepGoing === true) {
     roundNumber = ++roundNumber;
     if (roundNumber > 5) {
         keepGoing = false;
+        console.log(`The final score is ${humanScore} - ${computerScore}.`)
+        if (humanScore > computerScore) {
+            console.log("You win!");
+        } else if (computerScore > humanScore) {
+            console.log("The computer wins!");
+        } else {
+            console.log("It's a tie!");
+        }
     } else {
         keepGoing = true;
     }

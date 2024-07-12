@@ -25,7 +25,13 @@ let computerMove = getComputerChoice();
 // Create function getHumanChoice
 function getHumanChoice() {
     // Ask user for their move and store it in a variable
-    let humanMove = prompt("The computer challenges you to a game of rock paper scissors! What move do you choose? ")
+    let humanMove = prompt("The computer challenges you to a game of rock paper scissors! What move do you choose? ");
+    
+    // Check if the user cancelled the prompt
+    if (humanMove === null) {
+        return null;
+    }
+
     humanMove = humanMove.toLowerCase();
     return humanMove;
 }
@@ -74,8 +80,36 @@ function playRound() {
             result = "The computer wins!";
         }
     }
-    let finalresult = `The computer chose ${computerChoice}! ${result}`
+
+    // Adds 1 to human & computer scores if tie
+    if (result === "It's a tie!") {
+        humanScore = ++humanScore;
+        computerScore = ++computerScore;
+    } 
+    // Adds 1 to human score if human wins
+    else if (result === "You win!") {
+        humanScore = ++humanScore;
+    }
+    // Adds 1 to computer score if computer wins
+    else {
+        computerScore = ++computerScore;
+    }
+
+    // Full 2 sentences containing computer move, the result, and scores for both the human and computer
+    let finalresult = `The computer chose ${computerChoice}, while you chose ${humanMove}! ${result} Your score is ${humanScore}, the computer's score is ${computerScore}.`
+    // Saves sentences
     return finalresult;
 }
 
-console.log(playRound());
+let keepGoing = true;
+let roundNumber = 1;
+
+while (keepGoing === true) {
+    console.log(playRound());
+    roundNumber = ++roundNumber;
+    if (roundNumber > 5) {
+        keepGoing = false;
+    } else {
+        keepGoing = true;
+    }
+}

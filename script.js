@@ -16,7 +16,7 @@ function getComputerChoice() {
     computerMove = "paper";
     }
     // Save computer's chosen randomized move
-    return computerMove
+    return computerMove;
 }
 
 // Store the result of the function
@@ -25,7 +25,8 @@ let computerMove = getComputerChoice();
 // Create function getHumanChoice
 function getHumanChoice() {
     // Ask user for their move and store it in a variable
-    let humanMove = prompt("The computer challenges you to a game of rock paper scissors! What move do you choose? ");
+    let humanMove = prompt(`The computer challenges you to a game of rock paper scissors!
+         What move do you choose?`);
     
     // Check if the user cancelled the prompt
     if (humanMove === null) {
@@ -96,7 +97,8 @@ function playRound() {
     }
 
     // Full 2 sentences containing computer move, the result, and scores for both the human and computer
-    let finalresult = `The computer chose ${computerChoice}, while you chose ${humanMove}! ${result} Your score is ${humanScore}, the computer's score is ${computerScore}.`
+    let finalresult = `The computer chose ${computerChoice}, while you chose ${humanMove}!
+     ${result} Your score is ${humanScore}, the computer's score is ${computerScore}.`;
     // Saves sentences
     return finalresult;
 }

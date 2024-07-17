@@ -1,3 +1,9 @@
+// Declare button variables
+const rockButton = document.getElementById("rockButton");
+const paperButton = document.getElementById("paperButton");
+const scissorsButton = document.getElementById("scissorsButton");
+const resultDisplay = document.getElementById("result");
+
 // Create function getComputerChoice
 function getComputerChoice() {
     // Generate random number between 0 and 1
@@ -22,20 +28,6 @@ function getComputerChoice() {
 // Store the result of the function
 let computerMove = getComputerChoice();
 
-// Create function getHumanChoice
-function getHumanChoice() {
-    // Ask user for their move and store it in a variable
-    let humanMove = prompt(`The computer challenges you to a game of rock paper scissors!
-         What move do you choose?`);
-    
-    // Check if the user cancelled the prompt
-    if (humanMove === null) {
-        return null;
-    }
-
-    humanMove = humanMove.toLowerCase();
-    return humanMove;
-}
 
 // Record user's score
 let humanScore = 0;
@@ -43,13 +35,12 @@ let humanScore = 0;
 let computerScore = 0;
 
 // Logic to play a single round
-function playRound() {
+function playRound(humanMove) {
     // Input user's and computer's moves
-    let humanMove = getHumanChoice();
-    let computerChoice = getComputerChoice();
+    let computerMove = getComputerChoice();
     let result = "";
     // Logic for finding winner
-    if (computerChoice === "rock") {
+    if (computerMove === "rock") {
         if (humanMove === "rock") {
             // Tie
             result = "It's a tie!";
@@ -60,7 +51,7 @@ function playRound() {
             // Computer wins
             result = "The computer wins!";
         }
-    } else if (computerChoice === "paper") {
+    } else if (computerMove === "paper") {
         if (humanMove === "paper") {
             result = "It's a tie!";
         }  else if (humanMove === "scissors") {
@@ -97,29 +88,21 @@ function playRound() {
     }
 
     // Full 2 sentences containing computer move, the result, and scores for both the human and computer
-    let finalresult = `The computer chose ${computerChoice}, while you chose ${humanMove}!
+    let finalresult = `The computer chose ${computerMove}, while you chose ${humanMove}!
      ${result} Your score is ${humanScore}, the computer's score is ${computerScore}.`;
+    // Displays sentences
+    resultDisplay.textContent = finalresult;
     // Saves sentences
     return finalresult;
 }
 
-let keepGoing = true;
-let roundNumber = 1;
-
-while (keepGoing === true) {
-    console.log(playRound());
-    roundNumber = ++roundNumber;
-    if (roundNumber > 5) {
-        keepGoing = false;
-        console.log(`The final score is ${humanScore} - ${computerScore}.`)
-        if (humanScore > computerScore) {
-            console.log("You win!");
-        } else if (computerScore > humanScore) {
-            console.log("The computer wins!");
-        } else {
-            console.log("It's a tie!");
-        }
-    } else {
-        keepGoing = true;
-    }
-}
+// Declare button event listeners & store result in getHumanChoice
+rockButton.addEventListener("click", () => {
+    playRound("rock");
+})
+paperButton.addEventListener("click", () => {
+    playRound("paper");
+})
+scissorsButton.addEventListener("click", () => {
+    playRound("scissors");
+})
